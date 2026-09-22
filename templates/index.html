@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Lab — Compatibility Division</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..900;1,300..900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="min-h-screen text-white overflow-x-hidden">
+
+  <!-- Ambient background blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="grain"></div>
+
+  <main class="relative z-10 max-w-3xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+
+    <!-- Header -->
+    <header class="mb-12 text-center">
+      <p class="eyebrow">EXPERIMENTAL COMPATIBILITY DIVISION &middot; EST. TODAY</p>
+      <h1 class="headline mt-3">Love Lab</h1>
+      <p class="subhead mt-3">Feed us two names, two birthdates. The instruments will do the rest.</p>
+    </header>
+
+    <!-- Input form -->
+    <section id="form-card" class="glass-panel p-6 sm:p-10">
+      <div class="scan-line"></div>
+      <p class="readout-label mb-6">SPECIMEN INTAKE FORM</p>
+
+      <form id="love-form" class="grid sm:grid-cols-2 gap-6">
+        <fieldset class="subject-block">
+          <legend class="subject-label">SUBJECT A</legend>
+          <label class="field-label">Name</label>
+          <input required id="name1" type="text" placeholder="e.g. Rohan" class="lab-input" autocomplete="off">
+          <label class="field-label mt-4">Date of birth</label>
+          <input required id="dob1" type="date" class="lab-input">
+        </fieldset>
+
+        <fieldset class="subject-block">
+          <legend class="subject-label">SUBJECT B</legend>
+          <label class="field-label">Name</label>
+          <input required id="name2" type="text" placeholder="e.g. Priya" class="lab-input" autocomplete="off">
+          <label class="field-label mt-4">Date of birth</label>
+          <input required id="dob2" type="date" class="lab-input">
+        </fieldset>
+
+        <button type="submit" id="submit-btn" class="run-btn sm:col-span-2 mt-2">
+          <span>RUN ANALYSIS</span>
+        </button>
+        <p id="form-error" class="text-rose-300 text-sm hidden sm:col-span-2"></p>
+      </form>
+    </section>
+
+    <!-- Result card (3D tilt) -->
+    <section id="result-wrap" class="mt-10 hidden">
+      <div id="tilt-outer" class="tilt-outer">
+        <div id="result-card" class="glass-panel result-card p-6 sm:p-10">
+          <div class="scan-line"></div>
+          <div class="flex items-start justify-between">
+            <p class="readout-label">READING NO. <span id="reading-no">001</span></p>
+            <p class="readout-label" id="zodiac-vibe">—</p>
+          </div>
+
+          <div class="text-center my-8">
+            <p class="pair-names" id="pair-names">Name &amp; Name</p>
+            <div class="gauge-wrap mt-6">
+              <svg viewBox="0 0 200 120" class="gauge-svg">
+                <path d="M20 110 A80 80 0 0 1 180 110" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="14" stroke-linecap="round"/>
+                <path id="gauge-arc" d="M20 110 A80 80 0 0 1 180 110" fill="none" stroke="url(#gaugeGrad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2"/>
+                <defs>
+                  <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ff2e63"/>
+                    <stop offset="50%" stop-color="#ff6b9d"/>
+                    <stop offset="100%" stop-color="#ffd23f"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="gauge-center">
+                <span id="overall-score" class="score-num">00</span><span class="score-pct">%</span>
+              </div>
+            </div>
+            <h2 id="verdict-title" class="verdict-title mt-5">—</h2>
+            <p id="verdict-line" class="verdict-line mt-2">—</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-x-8 gap-y-5" id="stat-bars"></div>
+
+          <div class="flex justify-between mt-8 pt-6 lab-codes">
+            <div>
+              <p class="readout-label">LIFE PATH CODES</p>
+              <p class="code-value" id="life-path-codes">—</p>
+            </div>
+            <div class="text-right">
+              <p class="readout-label">NAME CIPHER</p>
+              <p class="code-value" id="name-codes">—</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3 mt-6 justify-center">
+        <button id="download-btn" class="action-btn action-btn-primary">Save result card</button>
+        <button id="retry-btn" class="action-btn action-btn-ghost">Run again</button>
+      </div>
+    </section>
+
+    <footer class="text-center mt-16 opacity-50 text-xs tracking-wide">
+      Love Lab is 100% pseudo-science, 0% relationship advice. Results non-binding. 💌
+    </footer>
+  </main>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
